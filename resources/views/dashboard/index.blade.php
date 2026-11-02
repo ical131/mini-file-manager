@@ -17,6 +17,7 @@
         </div>
 
         @include('dashboard.partials.statistics')
+        @include('dashboard.partials.folder-overview')
         @include('dashboard.partials.recent-files')
 
     </div>
