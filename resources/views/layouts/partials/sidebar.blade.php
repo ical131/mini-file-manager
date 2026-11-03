@@ -1,4 +1,7 @@
-<aside class="w-64 min-h-screen bg-white border-r border-slate-200 flex flex-col">
+<aside
+    id="sidebar"
+    class="fixed inset-y-0 left-0 z-40 w-64 h-screen bg-white border-r border-slate-200 flex flex-col transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:sticky lg:top-0"
+>
 
     <!-- Logo -->
     <div class="h-20 flex items-center px-6 border-b border-slate-100">

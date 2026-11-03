@@ -15,6 +15,12 @@
 
         @include('layouts.partials.sidebar')
 
+        <!-- Mobile Sidebar Overlay -->
+        <div
+            id="sidebar-overlay"
+            class="fixed inset-0 bg-black/40 z-30 hidden lg:hidden">
+        </div>
+
         <main class="flex-1 min-w-0">
 
             @include('layouts.partials.topbar')

@@ -1,21 +1,37 @@
-<header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-8">
 
-    <!-- Page Title -->
-    <div>
-        <h1 class="text-xl font-semibold text-slate-800">
-            @yield('page-title', 'Dashboard')
-        </h1>
+<header class="h-20 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 lg:px-8">
 
-        <p class="text-sm text-slate-400">
-            Manage your files and folders
-        </p>
+    <!-- Left Section -->
+    <div class="flex items-center gap-3">
+
+        <!-- Mobile Menu Button -->
+        <button
+            id="sidebar-toggle"
+            type="button"
+            class="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition"
+            aria-label="Open sidebar"
+        >
+            ☰
+        </button>
+
+        <!-- Page Title -->
+        <div>
+            <h1 class="text-xl font-semibold text-slate-800">
+                @yield('page-title', 'Dashboard')
+            </h1>
+
+            <p class="text-sm text-slate-400 hidden sm:block">
+                Manage your files and folders
+            </p>
+        </div>
+
     </div>
 
     <!-- Right Section -->
-    <div class="flex items-center gap-5">
+    <div class="flex items-center gap-3 sm:gap-5">
 
         <!-- Search -->
-        <div class="relative">
+        <div class="relative hidden md:block">
             <input
                 type="text"
                 placeholder="Search files..."
@@ -34,13 +50,13 @@
         </button>
 
         <!-- Profile -->
-        <div class="flex items-center gap-3 border-l border-slate-200 pl-5">
+        <div class="flex items-center gap-2 sm:gap-3 border-l border-slate-200 pl-3 sm:pl-5">
 
             <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold">
                 N
             </div>
 
-            <div>
+            <div class="hidden sm:block">
                 <p class="text-sm font-medium text-slate-700">
                     Nawwaf
                 </p>
