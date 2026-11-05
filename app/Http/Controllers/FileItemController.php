@@ -2,50 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FileItem;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreFileItemRequest;
+use App\Services\FileItemService;
 
 class FileItemController extends Controller
 {
+    protected FileItemService $fileItemService;
+
+    public function __construct(FileItemService $fileItemService)
+    {
+        $this->fileItemService = $fileItemService;
+    }
+
     // Menampilkan daftar file dan folder
     public function index()
     {
-        $items = FileItem::whereNull('parent_id')
-            ->latest()
-            ->get();
+        $items = $this->fileItemService->getRootItems();
 
         return response()->json($items);
     }
 
     // Menampilkan detail file atau folder
-    public function show(FileItem $fileItem)
+    public function show(int $id)
     {
-        return response()->json($fileItem);
+        $item = $this->fileItemService->getItemById($id);
+
+        return response()->json($item);
     }
 
-
-
     // Membuat folder baru
-    public function store(Request $request)
+    public function store(StoreFileItemRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'parent_id' => [
-                'nullable',
-                'exists:file_items,id',
-                function ($attribute, $value, $fail) {
-                    if ($value && FileItem::where('id', $value)->where('type', '!=', 'folder')->exists()) {
-                        $fail('Parent hanya boleh berupa folder.');
-                    }
-                },
-            ],
-        ]);
-
-        $folder = FileItem::create([
-            'name' => $validated['name'],
-            'type' => 'folder',
-            'parent_id' => $validated['parent_id'] ?? null,
-        ]);
+        $folder = $this->fileItemService->createFolder(
+            $request->validated()
+        );
 
         return response()->json([
             'message' => 'Folder berhasil dibuat.',
